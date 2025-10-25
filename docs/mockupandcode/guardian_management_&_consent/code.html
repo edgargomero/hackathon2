@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guardian Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "success": "#28A745",
+                        "warning": "#FFC107",
+                        "danger": "#DC3545",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="flex h-screen">
+<!-- Side Navigation -->
+<aside class="flex flex-col w-64 bg-white dark:bg-slate-900/50 border-r border-slate-200 dark:border-slate-800">
+<div class="flex flex-col justify-between flex-1 p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Admin user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBuCMY0At1lfhugiys1BAXb5vveQjtU3y9I2jFxAvJcPfDGbnf3soWoC0jpu51-IUZUkBPTPQNBoVZCEUKh1oZqXKYLHrxuREtXeQJPhPHeqHuUP1Z7f8omZeUPaax7p9Sc8MwbCNSTR7B1BlAWmlXKdhUO-DO3JMqlp02EYzt_TguQByvFbIC89PTCGDwXkuJEVdsyhQt_nrNJSJhmFcKA7dhCnY9ahlV_PSgkVT9TYrLlho9I4yKdBe1wGq9-MW_-Zvz_FAUQLr46");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-slate-50 text-base font-medium leading-normal">Admin Name</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">ICAP Administrator</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">school</span>
+<p class="text-sm font-medium leading-normal">Students</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">shield_person</span>
+<p class="text-sm font-medium leading-normal">Guardians</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<p class="text-sm font-medium leading-normal">Surveys</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-slate-50 text-sm font-bold leading-normal tracking-wide hover:bg-primary/90">
+<span class="truncate">New Survey</span>
+</button>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined">help</span>
+<p class="text-sm font-medium leading-normal">Help</p>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex flex-1 w-full overflow-hidden">
+<div class="flex w-full">
+<!-- Left Column: Guardian List -->
+<div class="flex flex-col w-full max-w-sm border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/50">
+<div class="p-4 border-b border-slate-200 dark:border-slate-800">
+<p class="text-slate-900 dark:text-slate-50 text-4xl font-black leading-tight tracking-[-0.033em]">Guardian Management</p>
+</div>
+<div class="p-4 border-b border-slate-200 dark:border-slate-800">
+<label class="flex flex-col w-full h-12">
+<div class="flex items-stretch w-full h-full flex-1 rounded-lg">
+<div class="text-slate-500 dark:text-slate-400 flex items-center justify-center pl-4 pr-2 bg-slate-100 dark:bg-slate-800 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-slate-900 dark:text-slate-50 focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-slate-800 h-full placeholder:text-slate-500 dark:placeholder:text-slate-400 px-2 text-base font-normal leading-normal" placeholder="Search by name or email..." value=""/>
+</div>
+</label>
+<div class="flex flex-wrap gap-2 mt-3">
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-slate-100 dark:bg-slate-800 px-3">
+<span class="material-symbols-outlined text-sm text-slate-600 dark:text-slate-300">verified</span>
+<p class="text-slate-800 dark:text-slate-200 text-sm font-medium leading-normal">Consent: All</p>
+<span class="material-symbols-outlined text-sm text-slate-600 dark:text-slate-300">expand_more</span>
+</button>
+<button class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-slate-100 dark:bg-slate-800 px-3">
+<span class="material-symbols-outlined text-sm text-slate-600 dark:text-slate-300">sort_by_alpha</span>
+<p class="text-slate-800 dark:text-slate-200 text-sm font-medium leading-normal">Sort: A-Z</p>
+<span class="material-symbols-outlined text-sm text-slate-600 dark:text-slate-300">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Guardian List Items -->
+<div class="flex-1 overflow-y-auto">
+<div class="flex flex-col divide-y divide-slate-200 dark:divide-slate-800">
+<div class="flex items-center gap-4 p-4 min-h-[72px] justify-between cursor-pointer bg-primary/10 dark:bg-primary/20 border-l-4 border-primary">
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Profile picture of Eleanor Vance" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBo0p-BAa38iGp9ZtFtanOD_WNa9u8GVrgNbLXP16bVwp9P19HoDk7ERNErJjFKYlsKlFmOGd0GUPZF_tDGdGpkkYnlG7akxfMtURQI_Na1Ag8U_p7xdJ4kBAiqxCtOzjJ9DBA16gqjMlxNlPzd_eSZj4qTEHL_kV_dzqR68Y2z6HSFJ5NtY8bCXlo93sqgk6DlT0K8Jz2W2z9dWzLjWfQEs8MUg_udcQgjlTG7iw3jFAs6W3h1DtM33KTBEm1rDq65vrBSgjRNxQls");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-50 text-base font-medium leading-normal line-clamp-1">Eleanor Vance</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal line-clamp-2">Student: Samuel Vance</p>
+</div>
+</div>
+<div class="shrink-0 text-success" data-icon="CheckCircle">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 min-h-[72px] justify-between cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Profile picture of Marcus Thorne" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAE0Me98kGKhUV93vHxpM1Z4aHAAdDy0CPoZhjAifAoArwxWRC4wsL2cEC-GYPQCXuEBj0M3rrXu1Z309Xux46bNeXdFTzjzFXNRbQWiKggtCR9Oi77wvbY2npsY0EPo7zk0FHh-rMYj0s2VepsGUeLP6tP1DDDRI-01xjkvIjIXIW7p41UunjAzlA3zSqH-hnoZJKeO-Vey1mlDOYeCV1ML4jbG3DDeGp1c1WwW-Hd0hRHFBx9acb3CRjKET-x8wISEMofEYZkQ_nD");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-50 text-base font-medium leading-normal line-clamp-1">Marcus Thorne</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal line-clamp-2">Student: Clara Thorne</p>
+</div>
+</div>
+<div class="shrink-0 text-warning" data-icon="Pending">
+<span class="material-symbols-outlined">pending</span>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 min-h-[72px] justify-between cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Profile picture of Isabella Rossi" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA7NIfUqBWokQR2ucGIEeV259pZvBbVSc5ssWj8FsilLS76yuhVaY8xqSfXlq_g0I7Bvau0E1OZMduTYoWephZ0nLkORKtMWzE8Hu-z_nv8xwAhyY87lWie6lzxr4Mntnh_i30rot6GBh4KClszjXeIvCxEkLBc35Ms8vtOr1U9yNuaOmxzWyCFdSkxbgCSLJNctxwMnPwhAtdZyppW4C-OhDqBn_yIGuZgw5Cr7-cs4shpgtbLh2ZdXZFIx8BhcGOKPpf4asYzDlao");'></div>
+<div class="flex flex-col justify-center">
+<p class="text-slate-900 dark:text-slate-50 text-base font-medium leading-normal line-clamp-1">Isabella Rossi</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal line-clamp-2">Student: Leo Rossi</p>
+</div>
+</div>
+<div class="shrink-0 text-danger" data-icon="Cancel">
+<span class="material-symbols-outlined">cancel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Guardian Profile -->
+<div class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-8">
+<div class="max-w-4xl mx-auto">
+<!-- Profile Header -->
+<header class="flex flex-wrap items-center justify-between gap-4 mb-8">
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-20" data-alt="Profile picture of Eleanor Vance" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZVJ4-heb-_NH7ioI1hyTEeklE916n6v6Lv3eRxVUvIwwKx7x9mGW3ctWPe8CG2GgdVPeNnIdWH2FpHk0KwbPeZh_SeNnCXdr3eSjfeDH93Lu9fPGSYGbpC7jrBR6cZsnU_MpxEdh_GD4_gkJq5MPXpeg27SJY8De6bOc9Uka-pSEY3FxGwGcEoBmkJwNGyaioDMhxCQHroXYW-Jcp1F7Lo96AL2D6Qk7BIwhMx-L17Pt3KWL8xsY1PHGJgj36z4bmDLvdnx8QeF_9");'></div>
+<div>
+<h2 class="text-3xl font-bold text-slate-900 dark:text-slate-50">Eleanor Vance</h2>
+<div class="mt-1 inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full bg-success/10 text-success">
+<span class="material-symbols-outlined text-base">check_circle</span>
+                                        Consent Granted
+                                    </div>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center gap-2 h-10 px-4 text-sm font-bold tracking-wide text-slate-700 dark:text-slate-200 bg-slate-200 dark:bg-slate-700 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600">
+<span>Resend Request</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-10 px-4 text-sm font-bold tracking-wide text-white bg-primary rounded-lg hover:bg-primary/90">
+<span class="material-symbols-outlined text-base">edit</span>
+<span>Edit Profile</span>
+</button>
+</div>
+</header>
+<!-- Tab Navigation -->
+<div class="border-b border-slate-200 dark:border-slate-700 mb-6">
+<nav class="flex -mb-px space-x-6">
+<a class="px-1 py-3 text-base font-semibold border-b-2 text-primary border-primary" href="#">Personal Details</a>
+<a class="px-1 py-3 text-base font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-primary hover:border-primary/50" href="#">Contact &amp; Availability</a>
+<a class="px-1 py-3 text-base font-semibold text-slate-500 dark:text-slate-400 border-b-2 border-transparent hover:text-primary hover:border-primary/50" href="#">Consent History</a>
+</nav>
+</div>
+<!-- Data Display Cards -->
+<div class="space-y-6">
+<div class="p-6 bg-white border rounded-xl border-slate-200 dark:bg-slate-900/50 dark:border-slate-800">
+<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Personal Data</h3>
+<dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+<div>
+<dt class="text-sm font-medium text-slate-500 dark:text-slate-400">Full Name</dt>
+<dd class="mt-1 text-base text-slate-900 dark:text-slate-100">Eleanor Vance</dd>
+</div>
+<div>
+<dt class="text-sm font-medium text-slate-500 dark:text-slate-400">Relationship to Student</dt>
+<dd class="mt-1 text-base text-slate-900 dark:text-slate-100">Mother</dd>
+</div>
+<div class="sm:col-span-2">
+<dt class="text-sm font-medium text-slate-500 dark:text-slate-400">Home Address</dt>
+<dd class="flex items-center gap-4 mt-1">
+<span class="text-base text-slate-900 dark:text-slate-100 font-mono">**************************</span>
+<button class="text-sm text-primary hover:underline">Show</button>
+</dd>
+</div>
+</dl>
+</div>
+<div class="p-6 bg-white border rounded-xl border-slate-200 dark:bg-slate-900/50 dark:border-slate-800">
+<h3 class="text-xl font-semibold text-slate-900 dark:text-slate-50 mb-4">Contact Phones</h3>
+<dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+<div>
+<dt class="text-sm font-medium text-slate-500 dark:text-slate-400">Mobile</dt>
+<dd class="mt-1 text-base text-slate-900 dark:text-slate-100">(555) 123-4567</dd>
+</div>
+<div>
+<dt class="text-sm font-medium text-slate-500 dark:text-slate-400">Home</dt>
+<dd class="mt-1 text-base text-slate-900 dark:text-slate-100">(555) 987-6543</dd>
+</div>
+</dl>
+</div>
+</div>
+<footer class="mt-8 text-center">
+<p class="text-xs text-slate-500 dark:text-slate-400">
+                                This system contains sensitive personal data. All actions are logged for security and compliance.
+                                <a class="underline text-primary" href="#">View Privacy Policy</a>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

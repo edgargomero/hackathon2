@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ICAP Survey Manager - Administrator Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1173d4",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings:
+                'FILL' 1,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-row">
+<!-- SideNavBar -->
+<nav class="flex h-screen w-64 flex-col border-r border-slate-200 bg-white dark:border-slate-800 dark:bg-background-dark sticky top-0">
+<div class="flex items-center gap-3 px-6 py-5 border-b border-slate-200 dark:border-slate-800">
+<span class="material-symbols-outlined text-primary text-3xl">
+                    fact_check
+                </span>
+<h2 class="text-slate-800 dark:text-slate-200 text-lg font-bold">ICAP Survey</h2>
+</div>
+<div class="flex flex-col justify-between h-full p-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined fill">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg" href="#">
+<span class="material-symbols-outlined">corporate_fare</span>
+<p class="text-sm font-medium">Institutions</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<p class="text-sm font-medium">Surveys</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg" href="#">
+<span class="material-symbols-outlined">summarize</span>
+<p class="text-sm font-medium">Reports</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</div>
+<div class="flex flex-col gap-4">
+<div class="border-t border-slate-200 dark:border-slate-800 pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg" href="#">
+<span class="material-symbols-outlined">help_center</span>
+<p class="text-sm font-medium">Help &amp; Support</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<p class="text-sm font-medium">Logout</p>
+</a>
+</div>
+<div class="flex gap-3 items-center px-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBaIgz5IuwH3zABE8vo7nLZTxzHvvCNyVSqoDysp5OrDw9olD2yTCy-e7TDEJgKHUbvJMzD23BhA3ycsrDNUO0JIpDOGylajmwlCKCy2LP1HrIL12d4OMdAF67os_Rh4Y0MiAnVsH20CDIYh9pUhH2R5iuowIJbB-BdpJzoB2BST0GGsIgCjcNxsov_xfssCYrSarelvnbcXsjPtjqaEAs33Ro3lOeWxMXfTnbJqIO7JTcwOSHR6sLFMzg_PzPHqT0Lbq9dG4SByDr");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-800 dark:text-slate-200 text-sm font-medium">Clinic Admin</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs">admin@clinic.edu</p>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-10 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-8 py-4">
+<!-- PageHeading -->
+<p class="text-slate-900 dark:text-slate-50 text-2xl font-bold tracking-tight">Administrator Overview</p>
+<div class="flex flex-1 justify-end items-center gap-4">
+<label class="relative flex-col min-w-40 !h-10 max-w-64 hidden sm:flex">
+<span class="material-symbols-outlined text-slate-500 absolute left-3 top-1/2 -translate-y-1/2">search</span>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-slate-200 focus:outline-0 focus:ring-2 focus:ring-primary/50 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 h-full placeholder:text-slate-400 dark:placeholder:text-slate-500 pl-10 pr-4 text-sm" placeholder="Search..." value=""/>
+</label>
+<div class="flex gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-white dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-white dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-xl">help</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuASTTO4xJKcc7l5DnoXpcvAIn1zpjRklytyjClXo1bywN1Gvye1i2f9e6yNUnj-Sw2VL-eUIc5Ld3WXlLWH_3NRNPCbfP0Svbz1Y5a-d7QXV4IIg64sMRz9uDU--encAT3plM2CfA1ueXghgSVmsy57D5ztgJQ4ze68k-x-mEicdt7W-NJeJ3oQ_PNcmWcYiyAuRVWnaL8NUqqDPuFg19XfK89embCAl84ddSKfR4DV8DcYwswz8nlL-bXZ1e0SHHAFRCFsbvbP_wgt");'></div>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Filters and Quick Actions -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<!-- Chips -->
+<div class="flex gap-2">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3 hover:bg-slate-50 dark:hover:bg-slate-700/50">
+<p class="text-slate-700 dark:text-slate-200 text-sm font-medium">Last 7 Days</p>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-lg">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary/10 text-primary border border-primary/20 px-3">
+<p class="text-sm font-semibold">This Month</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3 hover:bg-slate-50 dark:hover:bg-slate-700/50">
+<p class="text-slate-700 dark:text-slate-200 text-sm font-medium">Custom Range</p>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 text-lg">calendar_today</span>
+</button>
+</div>
+<div class="flex gap-3">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-4 hover:bg-slate-50 dark:hover:bg-slate-700/50">
+<span class="material-symbols-outlined text-slate-600 dark:text-slate-300 text-lg">download</span>
+<p class="text-slate-700 dark:text-slate-200 text-sm font-medium">Export</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary text-white px-4 hover:bg-primary/90">
+<span class="material-symbols-outlined text-lg">add</span>
+<p class="text-sm font-medium">New Survey</p>
+</button>
+</div>
+</div>
+<!-- Stats -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Active Institutions</p>
+<p class="text-slate-900 dark:text-slate-50 text-3xl font-bold">42</p>
+<p class="text-green-600 dark:text-green-500 text-sm font-medium flex items-center gap-1"><span class="material-symbols-outlined text-base">arrow_upward</span>+2%</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Pending Surveys</p>
+<p class="text-slate-900 dark:text-slate-50 text-3xl font-bold">18</p>
+<p class="text-green-600 dark:text-green-500 text-sm font-medium flex items-center gap-1"><span class="material-symbols-outlined text-base">arrow_upward</span>+5%</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Completed Surveys</p>
+<p class="text-slate-900 dark:text-slate-50 text-3xl font-bold">127</p>
+<p class="text-red-600 dark:text-red-500 text-sm font-medium flex items-center gap-1"><span class="material-symbols-outlined text-base">arrow_downward</span>-1%</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Reports Generated</p>
+<p class="text-slate-900 dark:text-slate-50 text-3xl font-bold">56</p>
+<p class="text-green-600 dark:text-green-500 text-sm font-medium flex items-center gap-1"><span class="material-symbols-outlined text-base">arrow_upward</span>+8%</p>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
+<div class="xl:col-span-3 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Submission Trends (Last 30 Days)</h3>
+<div class="h-80 flex items-center justify-center">
+<img alt="Line chart showing submission trends over the last 30 days" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADzS8rLOqTyWM4zi0vxT_DWU0H0omiUQjHNK746pJcIyJzLIWGKpk3jAx5BKb0FBFBCFyzg_M5TEN97SUi5Y1V-XkqH2_ziswZUyGaE9T_lyCh7GHNvhXuONJ6f_5wIsO8YMQbI77ob2NbNDiYzy17-d2FIA9VwycpsG5wsVyYSvuFYlIpI0JhTVmlC2v0Hkln0XfLTm3ic-YYp_xhrj2qcpGWqEHkUThvDvNZbIuLYgaHkW7zcZVt0_yjdNp7A0qKH0tKqc1rjpfR"/>
+</div>
+</div>
+<div class="xl:col-span-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Survey Completions</h3>
+<div class="h-80 flex items-center justify-center">
+<img alt="Doughnut chart showing the proportion of completed, pending, and in-progress surveys" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVtIO2iZJ-UmjHTVoY0WOxiyisqpJ3AfLFAMduP0pHNdHwR0IZ0K261gbphZsWIUL1nUbaVBmSZecdEq_zEJvFC63jJRZTH56Hwy3kHDAHBLMMKTqV7aO9ftc27znP6CkqaoKthnv9ZbP21X80W9nXmxKbu6ROekRCVjRZH6VlFlU3a-Rn0FzDksQ9ulcwXZOpCYSLmSZkxdbZ_30ceZxBfinpCN9ArrqUwUOlKCxwzYsUQNknUEocKiB4Nb4KuW93aTJUimBT1RuI"/>
+</div>
+</div>
+</div>
+<!-- Recent Survey Activity Table -->
+<div class="rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6">
+<h3 class="text-lg font-semibold text-slate-800 dark:text-slate-100">Recent Survey Activity</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left text-slate-500 dark:text-slate-400">
+<thead class="text-xs text-slate-700 dark:text-slate-300 uppercase bg-slate-50 dark:bg-slate-800">
+<tr>
+<th class="px-6 py-3" scope="col">Institution</th>
+<th class="px-6 py-3" scope="col">Survey Title</th>
+<th class="px-6 py-3" scope="col">Status</th>
+<th class="px-6 py-3" scope="col">Date</th>
+<th class="px-6 py-3" scope="col">
+<span class="sr-only">Actions</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-white dark:bg-slate-900 border-b dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<th class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap" scope="row">Greenwood University</th>
+<td class="px-6 py-4">Annual Student Feedback</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Completed</span>
+</td>
+<td class="px-6 py-4">2023-10-26</td>
+<td class="px-6 py-4 text-right">
+<a class="font-medium text-primary hover:underline" href="#">View Details</a>
+</td>
+</tr>
+<tr class="bg-white dark:bg-slate-900 border-b dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<th class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap" scope="row">North Valley College</th>
+<td class="px-6 py-4">Campus Safety Poll</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center bg-yellow-100 dark:bg-yellow-900/50 text-yellow-800 dark:text-yellow-300 text-xs font-medium px-2.5 py-0.5 rounded-full">In Progress</span>
+</td>
+<td class="px-6 py-4">2023-10-25</td>
+<td class="px-6 py-4 text-right">
+<a class="font-medium text-primary hover:underline" href="#">View Details</a>
+</td>
+</tr>
+<tr class="bg-white dark:bg-slate-900 border-b dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<th class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap" scope="row">Westmont Institute</th>
+<td class="px-6 py-4">Q3 Faculty Review</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Pending</span>
+</td>
+<td class="px-6 py-4">2023-10-24</td>
+<td class="px-6 py-4 text-right">
+<a class="font-medium text-primary hover:underline" href="#">View Details</a>
+</td>
+</tr>
+<tr class="bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/50">
+<th class="px-6 py-4 font-medium text-slate-900 dark:text-white whitespace-nowrap" scope="row">Eastside Technical School</th>
+<td class="px-6 py-4">IT Services Satisfaction</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center bg-green-100 dark:bg-green-900/50 text-green-800 dark:text-green-300 text-xs font-medium px-2.5 py-0.5 rounded-full">Completed</span>
+</td>
+<td class="px-6 py-4">2023-10-22</td>
+<td class="px-6 py-4 text-right">
+<a class="font-medium text-primary hover:underline" href="#">View Details</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between p-4 border-t border-slate-200 dark:border-slate-800">
+<span class="text-sm text-slate-500 dark:text-slate-400">
+                            Showing <span class="font-semibold text-slate-900 dark:text-white">1</span> to <span class="font-semibold text-slate-900 dark:text-white">4</span> of <span class="font-semibold text-slate-900 dark:text-white">100</span>
+</span>
+<div class="inline-flex rounded-lg shadow-sm border border-slate-300 dark:border-slate-700">
+<button class="relative inline-flex items-center px-3 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800/50 rounded-l-lg hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-10 focus:ring-2 focus:ring-primary" type="button">Previous</button>
+<button class="relative -ml-px inline-flex items-center px-3 py-2 text-sm font-medium text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-800/50 rounded-r-lg border-l border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 focus:z-10 focus:ring-2 focus:ring-primary" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

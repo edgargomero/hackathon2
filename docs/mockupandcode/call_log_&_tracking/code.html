@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ElevenLabs API Call Log</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "success": "#2ECC71",
+              "danger": "#E74C3C",
+              "warning": "#F39C12",
+              "text-light": "#333333",
+              "text-dark": "#e0e0e0",
+              "text-secondary-light": "#888888",
+              "text-secondary-dark": "#a0a0a0"
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-[1280px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-700 px-4 py-3">
+<div class="flex items-center gap-4 text-text-light dark:text-text-dark">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">ICAP Surveys</h2>
+</div>
+<div class="flex flex-1 justify-end items-center gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Dashboard</a>
+<a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Surveys</a>
+<a class="text-sm font-medium leading-normal text-primary" href="#">API Logs</a>
+<a class="text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-slate-200 dark:bg-slate-800 text-text-light dark:text-text-dark gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 w-10 bg-slate-200 dark:bg-slate-800 text-text-light dark:text-text-dark gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+<span class="material-symbols-outlined text-xl">help_outline</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC_gi0QKge6y72jDCRxF7ONJjXJtZGSvEFXARbGVyxz0biqfiRa8HTt9w0fMFyCa9QJs9a9OOFIRhmQxoqwc6gGooSwqOv-78ExyaRdVINOhyb7KoVdb2F_IGccszDki3k0vOLsoda96KovzWIr8fU8m8oBObMgTLkmo7Ok6LjVpmO-fbt6-_EfK8FBVyzyuSd5QfWepV1WXmmj9yNCqYz-93plPR8vGG6KLa4PpndvcAzo5QtfdGyV8J1Vhn_7Rfm0J-XJiK4dMUKg");'></div>
+</div>
+</header>
+<main class="flex flex-col gap-6 p-4">
+<div class="flex flex-wrap justify-between items-center gap-4">
+<p class="text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">ElevenLabs API Call Log</p>
+</div>
+<div class="bg-white dark:bg-background-dark/50 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 p-4 flex flex-col gap-4">
+<div class="flex flex-col md:flex-row gap-4">
+<label class="flex flex-col min-w-40 h-12 w-full md:w-1/2 lg:w-2/5">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-text-secondary-light dark:text-text-secondary-dark flex border-none bg-background-light dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-2xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-light dark:text-text-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-none bg-background-light dark:bg-slate-800 h-full placeholder:text-text-secondary-light dark:placeholder:text-text-secondary-dark px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search by Call ID or Recipient..." value=""/>
+</div>
+</label>
+<div class="flex-1 flex flex-wrap items-center gap-3">
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light dark:bg-slate-800 pl-4 pr-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700">
+<p class="text-sm font-medium leading-normal">Date Range</p>
+<span class="material-symbols-outlined text-xl">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light dark:bg-slate-800 pl-4 pr-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700">
+<p class="text-sm font-medium leading-normal">Status</p>
+<span class="material-symbols-outlined text-xl">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light dark:bg-slate-800 pl-4 pr-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700">
+<p class="text-sm font-medium leading-normal">Survey</p>
+<span class="material-symbols-outlined text-xl">expand_more</span>
+</button>
+<button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-background-light dark:bg-slate-800 pl-4 pr-2 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700">
+<p class="text-sm font-medium leading-normal">Error Type</p>
+<span class="material-symbols-outlined text-xl">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<div class="@container">
+<div class="flex overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-background-dark/50 shadow-sm">
+<table class="w-full text-left">
+<thead class="bg-background-light dark:bg-slate-800/50">
+<tr>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-id">Call ID</th>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-timestamp">Timestamp</th>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-recipient">Recipient/Student</th>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-survey">Survey Name</th>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-status">Status</th>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-duration">Duration</th>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-error">Error Info</th>
+<th class="px-4 py-3 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark table-col-actions text-center">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-t border-slate-200 dark:border-slate-700">
+<td class="table-col-id h-[72px] px-4 py-2 text-sm font-mono text-text-secondary-light dark:text-text-secondary-dark">c5b3-a8e9-4f2d</td>
+<td class="table-col-timestamp h-[72px] px-4 py-2 text-sm">2023-10-27 10:05 AM</td>
+<td class="table-col-recipient h-[72px] px-4 py-2 text-sm">Alex Johnson</td>
+<td class="table-col-survey h-[72px] px-4 py-2 text-sm">Fall 2023 Feedback</td>
+<td class="table-col-status h-[72px] px-4 py-2 text-sm">
+<div class="inline-flex items-center gap-2 rounded-full py-1 px-3 text-xs font-medium bg-success/10 text-success">
+<span class="size-2 rounded-full bg-success"></span> Success
+                                        </div>
+</td>
+<td class="table-col-duration h-[72px] px-4 py-2 text-sm">2:34</td>
+<td class="table-col-error h-[72px] px-4 py-2 text-sm">N/A</td>
+<td class="table-col-actions h-[72px] px-4 py-2">
+<div class="flex items-center justify-center gap-2">
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">play_circle</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">description</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">more_horiz</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-t border-slate-200 dark:border-slate-700 bg-background-light dark:bg-slate-800/30">
+<td class="table-col-id h-[72px] px-4 py-2 text-sm font-mono text-text-secondary-light dark:text-text-secondary-dark">d1e4-b9f0-5g3e</td>
+<td class="table-col-timestamp h-[72px] px-4 py-2 text-sm">2023-10-27 09:58 AM</td>
+<td class="table-col-recipient h-[72px] px-4 py-2 text-sm">Maria Garcia</td>
+<td class="table-col-survey h-[72px] px-4 py-2 text-sm">Spring Preregistration</td>
+<td class="table-col-status h-[72px] px-4 py-2 text-sm">
+<div class="inline-flex items-center gap-2 rounded-full py-1 px-3 text-xs font-medium bg-danger/10 text-danger">
+<span class="size-2 rounded-full bg-danger"></span> Failed
+                                        </div>
+</td>
+<td class="table-col-duration h-[72px] px-4 py-2 text-sm">0:12</td>
+<td class="table-col-error h-[72px] px-4 py-2 text-sm text-danger">Invalid phone number</td>
+<td class="table-col-actions h-[72px] px-4 py-2">
+<div class="flex items-center justify-center gap-2">
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">play_circle</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">description</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">more_horiz</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-t border-slate-200 dark:border-slate-700">
+<td class="table-col-id h-[72px] px-4 py-2 text-sm font-mono text-text-secondary-light dark:text-text-secondary-dark">f2f5-c0g1-6h4f</td>
+<td class="table-col-timestamp h-[72px] px-4 py-2 text-sm">2023-10-27 09:45 AM</td>
+<td class="table-col-recipient h-[72px] px-4 py-2 text-sm">Sam Chen</td>
+<td class="table-col-survey h-[72px] px-4 py-2 text-sm">Fall 2023 Feedback</td>
+<td class="table-col-status h-[72px] px-4 py-2 text-sm">
+<div class="inline-flex items-center gap-2 rounded-full py-1 px-3 text-xs font-medium bg-success/10 text-success">
+<span class="size-2 rounded-full bg-success"></span> Success
+                                        </div>
+</td>
+<td class="table-col-duration h-[72px] px-4 py-2 text-sm">3:15</td>
+<td class="table-col-error h-[72px] px-4 py-2 text-sm">N/A</td>
+<td class="table-col-actions h-[72px] px-4 py-2">
+<div class="flex items-center justify-center gap-2">
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">play_circle</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">description</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">more_horiz</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-t border-slate-200 dark:border-slate-700 bg-background-light dark:bg-slate-800/30">
+<td class="table-col-id h-[72px] px-4 py-2 text-sm font-mono text-text-secondary-light dark:text-text-secondary-dark">g3g6-d1h2-7i5g</td>
+<td class="table-col-timestamp h-[72px] px-4 py-2 text-sm">2023-10-26 04:30 PM</td>
+<td class="table-col-recipient h-[72px] px-4 py-2 text-sm">Emily White</td>
+<td class="table-col-survey h-[72px] px-4 py-2 text-sm">Graduation Survey</td>
+<td class="table-col-status h-[72px] px-4 py-2 text-sm">
+<div class="inline-flex items-center gap-2 rounded-full py-1 px-3 text-xs font-medium bg-warning/10 text-warning">
+<span class="size-2 rounded-full bg-warning"></span> In Progress
+                                        </div>
+</td>
+<td class="table-col-duration h-[72px] px-4 py-2 text-sm">0:45</td>
+<td class="table-col-error h-[72px] px-4 py-2 text-sm">N/A</td>
+<td class="table-col-actions h-[72px] px-4 py-2">
+<div class="flex items-center justify-center gap-2">
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">play_circle</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">description</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">more_horiz</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-t border-slate-200 dark:border-slate-700">
+<td class="table-col-id h-[72px] px-4 py-2 text-sm font-mono text-text-secondary-light dark:text-text-secondary-dark">h4h7-e2i3-8j6h</td>
+<td class="table-col-timestamp h-[72px] px-4 py-2 text-sm">2023-10-26 04:22 PM</td>
+<td class="table-col-recipient h-[72px] px-4 py-2 text-sm">David Lee</td>
+<td class="table-col-survey h-[72px] px-4 py-2 text-sm">Spring Preregistration</td>
+<td class="table-col-status h-[72px] px-4 py-2 text-sm">
+<div class="inline-flex items-center gap-2 rounded-full py-1 px-3 text-xs font-medium bg-danger/10 text-danger">
+<span class="size-2 rounded-full bg-danger"></span> Failed
+                                        </div>
+</td>
+<td class="table-col-duration h-[72px] px-4 py-2 text-sm">0:08</td>
+<td class="table-col-error h-[72px] px-4 py-2 text-sm text-danger">API timeout</td>
+<td class="table-col-actions h-[72px] px-4 py-2">
+<div class="flex items-center justify-center gap-2">
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">play_circle</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">description</span></button>
+<button class="flex items-center justify-center size-8 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-text-secondary-light dark:text-text-secondary-dark"><span class="material-symbols-outlined text-xl">more_horiz</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<style>
+                        @container(max-width:1200px){.table-col-error{display: none;}}
+                        @container(max-width:1024px){.table-col-survey{display: none;}}
+                        @container(max-width:900px){.table-col-duration{display: none;}}
+                        @container(max-width:768px){.table-col-id{display: none;}}
+                        @container(max-width:640px){.table-col-timestamp{display: none;}}
+                    </style>
+</div>
+<div class="flex justify-between items-center p-4">
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Showing 1 to 5 of 2,345 entries</p>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center h-10 px-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-700 disabled:opacity-50" disabled="">Previous</button>
+<button class="flex items-center justify-center h-10 px-4 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-700">Next</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

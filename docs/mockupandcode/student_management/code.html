@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Student Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1173d4",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "neutral-light": "#f4f6f8",
+              "neutral-dark": "#182431",
+              "neutral-border-light": "#e1e4e8",
+              "neutral-border-dark": "#2c3a47",
+              "text-light": "#333333",
+              "text-dark": "#e5e7eb",
+              "text-subtle-light": "#6b7280",
+              "text-subtle-dark": "#9ca3af",
+              "success": "#28a745",
+              "danger": "#dc3545",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark">
+<div class="relative flex min-h-screen w-full">
+<!-- SideNavBar -->
+<aside class="flex flex-col w-64 bg-neutral-light dark:bg-neutral-dark p-4 border-r border-neutral-border-light dark:border-neutral-border-dark shrink-0">
+<div class="flex items-center gap-2 p-2 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">school</span>
+<h1 class="text-xl font-bold text-text-light dark:text-text-dark">ICAP Surveys</h1>
+</div>
+<div class="flex flex-col justify-between flex-grow">
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-text-subtle-light dark:text-text-subtle-dark" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-sm font-medium">Student Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-text-subtle-light dark:text-text-subtle-dark" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Surveys</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/10 text-text-subtle-light dark:text-text-subtle-dark" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="flex flex-col">
+<div class="flex items-center gap-3 p-4 border-t border-neutral-border-light dark:border-neutral-border-dark mt-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Admin user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDLeg-i9azcJQljrdhML6BEtKN89dSEWQvWXf8863tMAqOkP_6zKqOFH9Ubg6D69ZO1raX-pCpX5zcNDgox87-Htd63hPZ0FLlhV_qBfeYdkyTrecJO84f4t8kMw3hkDON4coBlnGz5Cj-Nzg2bSqqi97mqBkz2WH8ucaj2ua3yE8-jpJxn6VqK0ooQHmx_xZehhhNRzE6zq6CjR3DX5UqJa1ZsYaoI9PUBIE3mjq6duIz8_umo_lrRofttoe4sJ1URRENVQly40VO4");'></div>
+<div class="flex flex-col">
+<h2 class="text-text-light dark:text-text-dark text-sm font-semibold leading-normal">Admin User</h2>
+<p class="text-text-subtle-light dark:text-text-subtle-dark text-xs font-normal leading-normal">admin@edu.com</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-6 md:p-8 lg:p-10">
+<div class="mx-auto max-w-7xl">
+<!-- Page Heading -->
+<header class="flex flex-wrap items-center justify-between gap-4 mb-6">
+<h1 class="text-3xl font-bold tracking-tight text-text-light dark:text-text-dark">Student Management</h1>
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-primary text-white text-sm font-bold shadow-sm hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-lg">add</span>
+<span class="truncate">Add New Student</span>
+</button>
+</header>
+<!-- Search and Filters -->
+<div class="mb-6 space-y-4">
+<div class="flex flex-col md:flex-row gap-4">
+<!-- Search Bar -->
+<div class="flex-grow">
+<label class="relative flex items-center h-12 w-full">
+<div class="absolute left-0 pl-4 text-text-subtle-light dark:text-text-subtle-dark">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full h-full pl-12 pr-4 rounded-lg border-neutral-border-light dark:border-neutral-border-dark bg-neutral-light dark:bg-neutral-dark focus:ring-2 focus:ring-primary focus:border-primary text-sm placeholder:text-text-subtle-light dark:placeholder:text-text-subtle-dark" placeholder="Search by Name or RUT..." type="text"/>
+</label>
+</div>
+<!-- Chips / Filters -->
+<div class="flex items-center gap-3">
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-neutral-light dark:bg-neutral-dark px-4 border border-neutral-border-light dark:border-neutral-border-dark hover:bg-neutral-light/80 dark:hover:bg-neutral-dark/80">
+<p class="text-sm font-medium">Institution</p>
+<span class="material-symbols-outlined text-lg">arrow_drop_down</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-neutral-light dark:bg-neutral-dark px-4 border border-neutral-border-light dark:border-neutral-border-dark hover:bg-neutral-light/80 dark:hover:bg-neutral-dark/80">
+<p class="text-sm font-medium">Course</p>
+<span class="material-symbols-outlined text-lg">arrow_drop_down</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-neutral-light dark:bg-neutral-dark px-4 border border-neutral-border-light dark:border-neutral-border-dark hover:bg-neutral-light/80 dark:hover:bg-neutral-dark/80">
+<p class="text-sm font-medium">Status</p>
+<span class="material-symbols-outlined text-lg">arrow_drop_down</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg px-4 text-text-subtle-light dark:text-text-subtle-dark hover:text-primary dark:hover:text-primary">
+<span class="text-sm font-medium">Clear</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-hidden rounded-lg border border-neutral-border-light dark:border-neutral-border-dark bg-neutral-light dark:bg-neutral-dark">
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead class="bg-neutral-light/50 dark:bg-neutral-dark/50">
+<tr class="border-b border-neutral-border-light dark:border-neutral-border-dark">
+<th class="p-4 w-12 text-center"><input class="h-4 w-4 rounded border-neutral-border-light dark:border-neutral-border-dark text-primary bg-transparent focus:ring-primary focus:ring-offset-0" type="checkbox"/></th>
+<th class="p-4 text-left font-semibold tracking-wider">RUT</th>
+<th class="p-4 text-left font-semibold tracking-wider">Full Name</th>
+<th class="p-4 text-left font-semibold tracking-wider">Course</th>
+<th class="p-4 text-left font-semibold tracking-wider">Institution</th>
+<th class="p-4 text-left font-semibold tracking-wider">Status</th>
+<th class="p-4 text-left font-semibold tracking-wider">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-border-light dark:divide-neutral-border-dark">
+<tr>
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-neutral-border-light dark:border-neutral-border-dark text-primary bg-transparent focus:ring-primary focus:ring-offset-0" type="checkbox"/></td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">12.345.678-9</td>
+<td class="p-4 font-medium text-text-light dark:text-text-dark">Isabella Rodriguez</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Grade 10</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Northwood High</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/20 text-success">Active</span></td>
+<td class="p-4">
+<div class="flex items-center gap-4">
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary dark:hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-danger dark:hover:text-danger transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-neutral-border-light dark:border-neutral-border-dark text-primary bg-transparent focus:ring-primary focus:ring-offset-0" type="checkbox"/></td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">13.456.789-0</td>
+<td class="p-4 font-medium text-text-light dark:text-text-dark">Benjamin Carter</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Grade 11</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Oak Meadow Academy</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/20 text-success">Active</span></td>
+<td class="p-4">
+<div class="flex items-center gap-4">
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary dark:hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-danger dark:hover:text-danger transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-neutral-border-light dark:border-neutral-border-dark text-primary bg-transparent focus:ring-primary focus:ring-offset-0" type="checkbox"/></td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">14.567.890-1</td>
+<td class="p-4 font-medium text-text-light dark:text-text-dark">Sophia Martinez</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Grade 9</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Northwood High</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/20 text-success">Active</span></td>
+<td class="p-4">
+<div class="flex items-center gap-4">
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary dark:hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-danger dark:hover:text-danger transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-neutral-border-light dark:border-neutral-border-dark text-primary bg-transparent focus:ring-primary focus:ring-offset-0" type="checkbox"/></td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">15.678.901-2</td>
+<td class="p-4 font-medium text-text-light dark:text-text-dark">Liam Gonzalez</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Grade 12</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Westwood Prep</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-danger/20 text-danger">Inactive</span></td>
+<td class="p-4">
+<div class="flex items-center gap-4">
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary dark:hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-danger dark:hover:text-danger transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="p-4 text-center"><input class="h-4 w-4 rounded border-neutral-border-light dark:border-neutral-border-dark text-primary bg-transparent focus:ring-primary focus:ring-offset-0" type="checkbox"/></td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">16.789.012-3</td>
+<td class="p-4 font-medium text-text-light dark:text-text-dark">Olivia Hernandez</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Grade 10</td>
+<td class="p-4 text-text-subtle-light dark:text-text-subtle-dark">Oak Meadow Academy</td>
+<td class="p-4"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success/20 text-success">Active</span></td>
+<td class="p-4">
+<div class="flex items-center gap-4">
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary dark:hover:text-primary transition-colors"><span class="material-symbols-outlined">edit</span></button>
+<button class="text-text-subtle-light dark:text-text-subtle-dark hover:text-danger dark:hover:text-danger transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between p-4 border-t border-neutral-border-light dark:border-neutral-border-dark text-sm text-text-subtle-light dark:text-text-subtle-dark">
+<p>Showing 1 to 5 of 42 results</p>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-primary/10 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="flex items-center justify-center h-8 w-8 rounded bg-primary/20 text-primary">1</button>
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-primary/10">2</button>
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-primary/10">3</button>
+<span>...</span>
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-primary/10">9</button>
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-primary/10">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
