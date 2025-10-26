@@ -4,7 +4,6 @@ import type {
   Institution,
   Guardian,
   Survey,
-  SurveyTemplate,
   CallLog,
   Report,
   PaginatedResponse,
@@ -52,12 +51,15 @@ export class DjangoDataClient {
 
       // Handle non-OK responses
       if (!response.ok) {
-        const errorData: DjangoErrorResponse = await response.json().catch(() => ({
-          detail: response.statusText,
-        }))
+        let errorData: DjangoErrorResponse
+        try {
+          errorData = await response.json()
+        } catch {
+          errorData = { detail: response.statusText }
+        }
 
         const message = errorData.detail || errorData.error || 'Request failed'
-        throw new HTTPException(response.status, { message })
+        throw new HTTPException(response.status as any, { message })
       }
 
       // Handle 204 No Content

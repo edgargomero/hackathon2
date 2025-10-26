@@ -110,6 +110,14 @@ export interface APIError {
   code?: string
 }
 
+// Django API Error Response
+export interface DjangoErrorResponse {
+  detail?: string
+  error?: string
+  code?: string
+  [key: string]: any // Additional error fields
+}
+
 // Pagination
 export interface PaginatedResponse<T> {
   count: number
@@ -143,4 +151,19 @@ export interface CreateStudentInput {
   edad: number
   curso: string
   genero?: 'M' | 'F' | 'O'
+}
+
+// Report (Informe ICAP)
+export interface Report {
+  id: string
+  clinica_id: string
+  tipo_informe: 'icap' | 'evaluacion' | 'seguimiento' | 'personalizado'
+  alumno_id?: string
+  encuesta_id?: string
+  titulo: string
+  contenido: Record<string, any>
+  archivo_url?: string | null
+  generado_por: string
+  created_at: string
+  updated_at: string
 }

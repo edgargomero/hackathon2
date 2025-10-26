@@ -5,12 +5,11 @@
 export type Bindings = {
   // Environment variables
   DJANGO_API_URL: string
-  SUPABASE_URL: string
+  NODE_ENV?: string // Optional: development, staging, production
 
   // Secrets (set via wrangler secret put)
-  DJANGO_API_KEY: string
-  SUPABASE_SERVICE_ROLE_KEY: string
-  JWT_SECRET: string
+  DJANGO_API_KEY?: string // Optional API key for Django if needed
+  JWT_SECRET?: string // Optional secret for frontend session management
 
   // Cloudflare bindings
   KV?: KVNamespace // Optional until created
@@ -18,14 +17,15 @@ export type Bindings = {
 
 /**
  * Variables set by middleware and available in context
+ * All protected routes have these values set by djangoAuthMiddleware
  */
 export type Variables = {
   userId: string
   userRole: 'superadmin' | 'clinica_admin' | 'institucion_admin' | 'profesional' | 'agente_ia' | 'readonly'
   clinicaId: string
-  userName?: string
-  accessToken?: string
-  currentUser?: any // Full UserDetail object from Django
+  accessToken: string // Always present after djangoAuthMiddleware
+  userName?: string // Optional, set by djangoClinicContextMiddleware
+  currentUser?: any // Optional, full UserDetail object from Django
 }
 
 /**

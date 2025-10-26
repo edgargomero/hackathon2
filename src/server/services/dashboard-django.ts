@@ -36,7 +36,7 @@ export async function getDashboardStatsFromDjango(
         : 0
 
     const trend =
-      value > previousValue ? 'up' : value < previousValue ? 'down' : 'stable'
+      value > previousValue ? 'up' : value < previousValue ? 'down' : 'neutral'
 
     return {
       label,

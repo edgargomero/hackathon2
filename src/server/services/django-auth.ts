@@ -4,7 +4,6 @@ import type {
   LoginResponse,
   RegisterRequest,
   RegisterResponse,
-  TokenRefreshRequest,
   TokenRefreshResponse,
   TokenValidateResponse,
   ChangePasswordRequest,
@@ -31,8 +30,7 @@ export class DjangoAuthClient {
    */
   private async request<T>(
     endpoint: string,
-    options: RequestInit = {},
-    skipAuth = false
+    options: RequestInit = {}
   ): Promise<T> {
     const url = `${this.baseURL}${endpoint}`
 
@@ -50,14 +48,17 @@ export class DjangoAuthClient {
 
       // Handle non-OK responses
       if (!response.ok) {
-        const errorData: DjangoErrorResponse = await response.json().catch(() => ({
-          detail: response.statusText,
-        }))
+        let errorData: DjangoErrorResponse
+        try {
+          errorData = await response.json()
+        } catch {
+          errorData = { detail: response.statusText }
+        }
 
         // Extract error message
         const message = errorData.detail || errorData.error || 'Request failed'
 
-        throw new HTTPException(response.status, { message })
+        throw new HTTPException(response.status as any, { message })
       }
 
       // Handle 204 No Content
@@ -88,7 +89,7 @@ export class DjangoAuthClient {
     return this.request<LoginResponse>('/api/auth/login/', {
       method: 'POST',
       body: JSON.stringify(credentials),
-    }, true)
+    })
   }
 
   /**
@@ -99,7 +100,7 @@ export class DjangoAuthClient {
     return this.request<RegisterResponse>('/api/auth/register/', {
       method: 'POST',
       body: JSON.stringify(userData),
-    }, true)
+    })
   }
 
   /**
@@ -110,7 +111,7 @@ export class DjangoAuthClient {
     return this.request<TokenRefreshResponse>('/api/auth/token/refresh/', {
       method: 'POST',
       body: JSON.stringify({ refresh: refreshToken }),
-    }, true)
+    })
   }
 
   /**
