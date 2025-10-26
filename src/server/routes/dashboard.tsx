@@ -2,21 +2,14 @@
  * Dashboard Routes
  *
  * API endpoints for clinic administrator dashboard
- * Provides statistics, trends, and activity data
+ * Provides statistics, trends, and activity data via Django REST API
  */
 
 import { Hono } from 'hono'
 import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
 import type { HonoEnv } from '@shared/types/env'
-import { createSupabaseClient } from '@server/services/supabase'
-import {
-  getDashboardData,
-  getDashboardStats,
-  getSubmissionTrends,
-  getSurveyCompletions,
-  getRecentActivity,
-} from '@server/services/dashboard'
+import { getDashboardStatsFromDjango, getDashboardDataFromDjango } from '@server/services/dashboard-django'
 import { Dashboard } from '@server/components/Dashboard'
 
 const app = new Hono<HonoEnv>()
@@ -47,14 +40,14 @@ const exportQuerySchema = z.object({
 
 /**
  * GET / (HTML page)
- * Render dashboard page with SSR
+ * Render dashboard page with SSR using Django data
  */
 app.get('/', zValidator('query', dashboardQuerySchema), async (c) => {
   const clinicaId = c.get('clinicaId')
   const userName = c.get('userName')
   const userRole = c.get('userRole')
   const userId = c.get('userId')
-  const query = c.req.valid('query')
+  const accessToken = c.get('accessToken')
 
   if (!clinicaId) {
     return c.html(
@@ -67,16 +60,9 @@ app.get('/', zValidator('query', dashboardQuerySchema), async (c) => {
   }
 
   try {
-    const supabase = createSupabaseClient(c.env)
-
-    const dashboardData = await getDashboardData(supabase, clinicaId, {
-      period: query.period,
-      startDate: query.start_date,
-      endDate: query.end_date,
-      institucionId: query.institucion_id,
-      limit: query.limit,
-      offset: query.offset,
-    })
+    // Fetch dashboard data from Django API
+    const dashboardData = await getDashboardDataFromDjango(c.env, accessToken)
+    dashboardData.clinicaId = clinicaId
 
     return c.html(
       <Dashboard
@@ -102,11 +88,11 @@ app.get('/', zValidator('query', dashboardQuerySchema), async (c) => {
 
 /**
  * GET /api (JSON API)
- * Get complete dashboard data (stats, trends, completions, recent activity)
+ * Get complete dashboard data from Django
  */
 app.get('/api', zValidator('query', dashboardQuerySchema), async (c) => {
   const clinicaId = c.get('clinicaId')
-  const query = c.req.valid('query')
+  const accessToken = c.get('accessToken')
 
   if (!clinicaId) {
     return c.json(
@@ -119,16 +105,8 @@ app.get('/api', zValidator('query', dashboardQuerySchema), async (c) => {
   }
 
   try {
-    const supabase = createSupabaseClient(c.env)
-
-    const dashboardData = await getDashboardData(supabase, clinicaId, {
-      period: query.period,
-      startDate: query.start_date,
-      endDate: query.end_date,
-      institucionId: query.institucion_id,
-      limit: query.limit,
-      offset: query.offset,
-    })
+    const dashboardData = await getDashboardDataFromDjango(c.env, accessToken)
+    dashboardData.clinicaId = clinicaId
 
     return c.json({
       success: true,
@@ -147,12 +125,12 @@ app.get('/api', zValidator('query', dashboardQuerySchema), async (c) => {
 })
 
 /**
- * GET /api/dashboard/stats
- * Get only dashboard statistics
+ * GET /stats
+ * Get only dashboard statistics from Django
  */
 app.get('/stats', zValidator('query', dashboardQuerySchema), async (c) => {
   const clinicaId = c.get('clinicaId')
-  const query = c.req.valid('query')
+  const accessToken = c.get('accessToken')
 
   if (!clinicaId) {
     return c.json(
@@ -165,13 +143,7 @@ app.get('/stats', zValidator('query', dashboardQuerySchema), async (c) => {
   }
 
   try {
-    const supabase = createSupabaseClient(c.env)
-
-    const stats = await getDashboardStats(supabase, clinicaId, {
-      period: query.period,
-      startDate: query.start_date,
-      endDate: query.end_date,
-    })
+    const stats = await getDashboardStatsFromDjango(c.env, accessToken)
 
     return c.json({
       success: true,
@@ -190,146 +162,12 @@ app.get('/stats', zValidator('query', dashboardQuerySchema), async (c) => {
 })
 
 /**
- * GET /api/dashboard/trends
- * Get submission trends for line chart
- */
-app.get('/trends', zValidator('query', dashboardQuerySchema), async (c) => {
-  const clinicaId = c.get('clinicaId')
-  const query = c.req.valid('query')
-
-  if (!clinicaId) {
-    return c.json(
-      {
-        error: 'Clinic context required',
-        message: 'User must be associated with a clinic',
-      },
-      403
-    )
-  }
-
-  try {
-    const supabase = createSupabaseClient(c.env)
-
-    const trends = await getSubmissionTrends(supabase, clinicaId, {
-      period: query.period,
-      startDate: query.start_date,
-      endDate: query.end_date,
-    })
-
-    return c.json({
-      success: true,
-      data: trends,
-    })
-  } catch (error) {
-    console.error('[Dashboard] Error fetching trends:', error)
-    return c.json(
-      {
-        error: 'Failed to fetch submission trends',
-        message: error instanceof Error ? error.message : 'Unknown error',
-      },
-      500
-    )
-  }
-})
-
-/**
- * GET /api/dashboard/completions
- * Get survey completions distribution for doughnut chart
- */
-app.get('/completions', zValidator('query', dashboardQuerySchema), async (c) => {
-  const clinicaId = c.get('clinicaId')
-  const query = c.req.valid('query')
-
-  if (!clinicaId) {
-    return c.json(
-      {
-        error: 'Clinic context required',
-        message: 'User must be associated with a clinic',
-      },
-      403
-    )
-  }
-
-  try {
-    const supabase = createSupabaseClient(c.env)
-
-    const completions = await getSurveyCompletions(supabase, clinicaId, {
-      period: query.period,
-      startDate: query.start_date,
-      endDate: query.end_date,
-    })
-
-    return c.json({
-      success: true,
-      data: completions,
-    })
-  } catch (error) {
-    console.error('[Dashboard] Error fetching completions:', error)
-    return c.json(
-      {
-        error: 'Failed to fetch survey completions',
-        message: error instanceof Error ? error.message : 'Unknown error',
-      },
-      500
-    )
-  }
-})
-
-/**
- * GET /api/dashboard/activity
- * Get recent survey activity with pagination
- */
-app.get('/activity', zValidator('query', dashboardQuerySchema), async (c) => {
-  const clinicaId = c.get('clinicaId')
-  const query = c.req.valid('query')
-
-  if (!clinicaId) {
-    return c.json(
-      {
-        error: 'Clinic context required',
-        message: 'User must be associated with a clinic',
-      },
-      403
-    )
-  }
-
-  try {
-    const supabase = createSupabaseClient(c.env)
-
-    const activity = await getRecentActivity(supabase, clinicaId, {
-      institucionId: query.institucion_id,
-      limit: query.limit,
-      offset: query.offset,
-    })
-
-    return c.json({
-      success: true,
-      data: activity.data,
-      pagination: {
-        total: activity.total,
-        limit: activity.limit,
-        offset: activity.offset,
-        hasMore: activity.hasMore,
-      },
-    })
-  } catch (error) {
-    console.error('[Dashboard] Error fetching activity:', error)
-    return c.json(
-      {
-        error: 'Failed to fetch recent activity',
-        message: error instanceof Error ? error.message : 'Unknown error',
-      },
-      500
-    )
-  }
-})
-
-/**
- * GET /api/dashboard/export
+ * GET /export
  * Export dashboard data in various formats
  */
 app.get('/export', zValidator('query', exportQuerySchema), async (c) => {
   const clinicaId = c.get('clinicaId')
+  const accessToken = c.get('accessToken')
   const query = c.req.valid('query')
 
   if (!clinicaId) {
@@ -343,21 +181,13 @@ app.get('/export', zValidator('query', exportQuerySchema), async (c) => {
   }
 
   try {
-    const supabase = createSupabaseClient(c.env)
-
-    // Fetch dashboard data for export
-    const dashboardData = await getDashboardData(supabase, clinicaId, {
-      period: query.period,
-      startDate: query.start_date,
-      endDate: query.end_date,
-      limit: 1000, // Export more records
-      offset: 0,
-    })
+    // Fetch dashboard data from Django for export
+    const dashboardData = await getDashboardDataFromDjango(c.env, accessToken)
+    dashboardData.clinicaId = clinicaId
 
     // For now, return JSON format
-    // TODO: Implement CSV, XLSX, PDF generation in future
+    // TODO: Implement CSV, XLSX, PDF generation
     if (query.format === 'csv') {
-      // CSV format placeholder
       const csv = convertDashboardToCSV(dashboardData)
 
       return c.text(csv, 200, {
@@ -412,15 +242,6 @@ function convertDashboardToCSV(data: any): string {
     `Reports Generated,${data.stats.reportsGenerated.value},${data.stats.reportsGenerated.previousValue},${data.stats.reportsGenerated.percentageChange.toFixed(1)}%,${data.stats.reportsGenerated.trend}`
   )
   lines.push('')
-
-  // Recent Activity
-  lines.push('Recent Survey Activity')
-  lines.push('Institution,Survey Title,Status,Date')
-  data.recentActivity.data.forEach((activity: any) => {
-    lines.push(
-      `"${activity.institutionName}","${activity.surveyTitle}",${activity.status},${activity.date}`
-    )
-  })
 
   return lines.join('\n')
 }

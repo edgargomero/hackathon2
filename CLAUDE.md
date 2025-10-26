@@ -11,9 +11,17 @@ This file provides guidance to Claude Code when working with the **ICAP Survey P
 - **Frontend**: Hono 4.6.14 + Cloudflare Pages (SSR with Hono/JSX)
 - **Backend API**: Django 5.2.1 + Django REST Framework 3.15.2
 - **Authentication**: Django Simple JWT 5.3.0 (access: 1h, refresh: 1d)
-- **Database**: Supabase PostgreSQL (direct queries for reads)
+- **Database**: PostgreSQL (accessed exclusively via Django ORM)
 - **Deployment**: Cloudflare Pages (frontend) + Cloudflare Containers (backend)
 - **AI Integration**: ElevenLabs (voice calls), Cloudflare Workers AI (future)
+
+### Architecture Principle
+
+**All data operations flow through Django API** - The frontend does NOT query the database directly. This ensures:
+- ✅ Consistent multi-tenant filtering (Django ViewSets enforce `clinica_id`)
+- ✅ Business logic stays in one place (Django models and serializers)
+- ✅ Security (Row-level permissions enforced by Django)
+- ✅ Easier auditing and compliance (all operations logged via Django middleware)
 
 ### Multi-Tenant Architecture
 
@@ -419,9 +427,9 @@ The `djangoClinicContextMiddleware` (src/server/middleware/django-auth.ts) autom
 
 ---
 
-## Database Schema (Supabase)
+## Database Schema (PostgreSQL via Django)
 
-The frontend queries Supabase directly for read operations while writes go through Django API.
+All database operations (reads and writes) go through Django REST API.
 
 ### Key Tables
 
@@ -438,7 +446,7 @@ The frontend queries Supabase directly for read operations while writes go throu
 - **registro_llamada**: Call logs (ElevenLabs integration)
 - **informe_icap**: Generated reports
 
-**Multi-Tenant Filtering**: All Supabase queries in `src/server/services/supabase.ts` filter by `clinica_id`.
+**Multi-Tenant Filtering**: Django ViewSets automatically filter all queries by the authenticated user's `clinica_id` from their JWT token.
 
 ---
 
@@ -530,9 +538,9 @@ Use Django's user roles to enforce permissions:
 
 ### When Adding New Features
 
-1. **Check Django API first**: Most data operations should use Django REST API
-2. **Use Supabase for reads**: Direct Supabase queries are OK for read-only operations
-3. **Respect multi-tenancy**: ALWAYS filter by `clinica_id`
+1. **Use Django API for ALL data operations**: Authentication, reads, writes, updates, deletes
+2. **No direct database access**: Frontend never queries PostgreSQL directly
+3. **Trust Django for multi-tenancy**: Django automatically filters by user's `clinica_id`
 4. **Check permissions**: Verify user role before allowing operations
 5. **Log sensitive actions**: Track who accessed/modified personal data
 
@@ -549,9 +557,9 @@ src/
 │   │   ├── dashboard.ts # Dashboard data endpoints
 │   │   └── students.ts  # Student CRUD endpoints
 │   ├── services/        # Business logic
-│   │   ├── django-auth.ts    # Django API client
-│   │   ├── supabase.ts       # Supabase queries
-│   │   └── dashboard.ts      # Dashboard analytics
+│   │   ├── django-auth.ts    # Django Authentication API client
+│   │   ├── django-data.ts    # Django Data API client (CRUD operations)
+│   │   └── dashboard-django.ts  # Dashboard analytics via Django
 │   ├── middleware/      # Request middleware
 │   │   └── django-auth.ts    # JWT validation
 │   └── index.tsx        # Main Hono app
@@ -592,7 +600,7 @@ npm run lint
 **Problem**: Users seeing data from other clinics
 
 **Solution**:
-1. Verify ALL Supabase queries filter by `clinica_id`
+1. Verify ALL API requests include valid JWT token
 2. Check `djangoClinicContextMiddleware` is applied
 3. Review Django API ViewSet for proper queryset filtering
 
@@ -630,7 +638,6 @@ Planned integration for:
 
 - **Hono Documentation**: https://hono.dev/
 - **Django REST Framework**: https://www.django-rest-framework.org/
-- **Supabase Docs**: https://supabase.com/docs
 - **Cloudflare Pages**: https://developers.cloudflare.com/pages/
 - **JWT Best Practices**: https://datatracker.ietf.org/doc/html/rfc8725
 

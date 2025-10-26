@@ -18,7 +18,7 @@ import dashboardRoutes from './routes/dashboard'
  * Main Hono Application
  *
  * Entry point for the ICAP Survey Platform
- * Deployed on Cloudflare Pages with Supabase backend
+ * Deployed on Cloudflare Pages with Django REST API backend
  */
 const app = new Hono<HonoEnv>()
 
@@ -351,7 +351,8 @@ app.get('/api/version', (c) => {
   return c.json({
     version: '1.0.0',
     platform: 'Cloudflare Pages + Hono',
-    database: 'Supabase PostgreSQL',
+    backend: 'Django REST API',
+    database: 'PostgreSQL',
   })
 })
 

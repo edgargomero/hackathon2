@@ -5,7 +5,6 @@ pages_build_output_dir = "dist"
 # Development variables (non-sensitive)
 [vars]
 DJANGO_API_URL = "http://localhost:8000"
-SUPABASE_URL = "https://qetwmgvlqzevksqnhruz.supabase.co"
 NODE_ENV = "development"
 
 # KV Namespace for caching (will create this via CLI)
@@ -19,9 +18,8 @@ vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", NODE_EN
 
 # Production environment (main branch uses default name above)
 [env.production]
-vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", SUPABASE_URL = "https://qetwmgvlqzevksqnhruz.supabase.co", NODE_ENV = "production" }
+vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", NODE_ENV = "production" }
 
 # Secrets (set via: wrangler secret put SECRET_NAME)
-# - DJANGO_API_KEY
-# - SUPABASE_SERVICE_ROLE_KEY
-# - JWT_SECRET
+# - DJANGO_API_KEY (optional, for API authentication if needed)
+# - JWT_SECRET (optional, for frontend session management if needed)
