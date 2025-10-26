@@ -3,8 +3,9 @@
 # Never commit .dev.vars to git!
 
 # Django OMR Backend API Key
-# Get this from your Django admin or settings
-DJANGO_API_KEY=your-django-token-here
+# Production key (for reference): e8fdefc3922210c44f84336609eac8675656b6d8c662054303ee575e106e647d
+# For local development, you can use the same key or get a dev key from Django admin
+DJANGO_API_KEY=e8fdefc3922210c44f84336609eac8675656b6d8c662054303ee575e106e647d
 
 # Supabase Service Role Key (not anon key!)
 # Find this in: Supabase Dashboard > Settings > API > service_role key

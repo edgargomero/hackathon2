@@ -18,10 +18,17 @@ Django OMR Backend (Future - when documented)
 
 - **Framework**: [Hono](https://hono.dev) - Ultrafast web framework for the edge
 - **Runtime**: Cloudflare Pages Functions
+- **Backend API**: Django 5.2.1 + DRF 3.15.2 (deployed on Cloudflare Workers)
 - **Database**: Supabase PostgreSQL
 - **Styling**: TailwindCSS + Inter font
 - **Language**: TypeScript
 - **Build Tool**: Vite
+
+## 🌐 Production Endpoints
+
+- **Frontend**: `https://hackathon2-icap.pages.dev` (auto-deployed from `main`)
+- **Backend API**: `https://api-psycho.edgar-gomero.workers.dev`
+- **Database**: Supabase (qetwmgvlqzevksqnhruz.supabase.co)
 
 ## 📁 Project Structure
 

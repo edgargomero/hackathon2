@@ -130,7 +130,7 @@ Para cada proyecto (Production y Staging), configura las variables de entorno:
 #### Production (`hackathon2-icap`)
 
 ```
-DJANGO_API_URL=https://api-psycho.your-domain.workers.dev
+DJANGO_API_URL=https://api-psycho.edgar-gomero.workers.dev
 SUPABASE_URL=https://qetwmgvlqzevksqnhruz.supabase.co
 NODE_ENV=production
 ```
@@ -138,14 +138,16 @@ NODE_ENV=production
 #### Staging (`hackathon2-icap-staging`)
 
 ```
-DJANGO_API_URL=https://api-psycho-staging.your-domain.workers.dev
+DJANGO_API_URL=https://api-psycho.edgar-gomero.workers.dev
 SUPABASE_URL=https://qetwmgvlqzevksqnhruz.supabase.co
 NODE_ENV=staging
 ```
 
 **Secrets** (marcados como encrypted):
 - `SUPABASE_SERVICE_ROLE_KEY`: Tu service role key de Supabase
-- `DJANGO_API_KEY`: API key para autenticación con Django
+- `DJANGO_API_KEY`: e8fdefc3922210c44f84336609eac8675656b6d8c662054303ee575e106e647d
+
+> **⚠️ Nota de Seguridad**: El `DJANGO_API_KEY` mostrado arriba debe configurarse como variable de entorno **encrypted** en Cloudflare Pages Dashboard, NO como variable pública.
 
 ## 🔄 Flujo de CI/CD
 

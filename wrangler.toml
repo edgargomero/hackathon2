@@ -6,6 +6,7 @@ pages_build_output_dir = "dist"
 [vars]
 DJANGO_API_URL = "http://localhost:8000"
 SUPABASE_URL = "https://qetwmgvlqzevksqnhruz.supabase.co"
+NODE_ENV = "development"
 
 # KV Namespace for caching (will create this via CLI)
 # [[kv_namespaces]]
@@ -15,11 +16,11 @@ SUPABASE_URL = "https://qetwmgvlqzevksqnhruz.supabase.co"
 # Staging environment
 [env.staging]
 name = "hackathon2-icap-staging"
-vars = { DJANGO_API_URL = "https://api-psycho-staging.workers.dev" }
+vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", NODE_ENV = "staging" }
 
 # Production environment (main branch uses default name above)
 [env.production]
-vars = { DJANGO_API_URL = "https://api-psycho.workers.dev" }
+vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", NODE_ENV = "production" }
 
 # Secrets (set via: wrangler secret put SECRET_NAME)
 # - DJANGO_API_KEY
