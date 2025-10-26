@@ -58,15 +58,14 @@ export function createAuthActions(state: AuthState): AuthActions {
       }
 
       const data = await parseResponse(response, LoginResponseSchema)
-      const user = data.user as UserDetail
 
-      // Actualizar estado at�micamente
-      batch(() => {
-        state.currentUser.value = user
-        state.lastRefreshTimestamp.value = Date.now()
-        state.isLoading.value = false
-        state.error.value = null
-      })
+      // Login exitoso - ahora validar token para obtener perfil completo
+      // Esto asegura que tengamos todos los campos de UserDetail
+      const user = await validateCurrentSession()
+
+      if (!user) {
+        throw new Error('Failed to validate session after login')
+      }
 
       return user
     } catch (err) {

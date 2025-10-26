@@ -58,10 +58,32 @@ const UserDetailSchema = z.object({
 // ============ API Response Schemas ============
 
 /**
+ * Schema para usuario en respuesta de login (subset de UserDetail)
+ * Django /api/auth/login/ retorna solo campos básicos, no el perfil completo
+ */
+const LoginUserSchema = z.object({
+  id: z.number(),
+  username: z.string(),
+  email: z.string().email(),
+  first_name: z.string(),
+  last_name: z.string(),
+  role: z.enum([
+    'superadmin',
+    'clinica_admin',
+    'institucion_admin',
+    'profesional',
+    'agente_ia',
+    'readonly'
+  ]),
+  role_display: z.string(),
+  activo: z.boolean()
+})
+
+/**
  * Respuesta de /api/auth/login
  */
 export const LoginResponseSchema = z.object({
-  user: UserDetailSchema,
+  user: LoginUserSchema,
   // Tokens están en HTTP-only cookies, no en JSON
   message: z.string().optional()
 })
