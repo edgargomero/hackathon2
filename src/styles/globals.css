@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    @apply bg-background-light dark:bg-background-dark;
+    @apply text-text-light dark:text-text-dark;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply flex items-center justify-center gap-2 h-10 px-4 rounded-lg;
+    @apply bg-primary text-white text-sm font-bold;
+    @apply shadow-sm hover:bg-primary/90 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply flex items-center justify-center gap-2 h-10 px-4 rounded-lg;
+    @apply bg-neutral-light dark:bg-neutral-dark;
+    @apply text-text-light dark:text-text-dark text-sm font-medium;
+    @apply border border-neutral-border-light dark:border-neutral-border-dark;
+    @apply hover:bg-neutral-light/80 dark:hover:bg-neutral-dark/80 transition-colors;
+  }
+
+  .card {
+    @apply bg-white dark:bg-slate-900 rounded-xl;
+    @apply border border-slate-200 dark:border-slate-800;
+    @apply shadow-sm;
+  }
+
+  .input-field {
+    @apply w-full h-12 px-4 rounded-lg;
+    @apply border border-neutral-border-light dark:border-neutral-border-dark;
+    @apply bg-neutral-light dark:bg-neutral-dark;
+    @apply focus:ring-2 focus:ring-primary focus:border-primary;
+    @apply text-sm placeholder:text-text-subtle-light dark:placeholder:text-text-subtle-dark;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-badge-completed {
+    @apply status-badge bg-status-completed/10 text-status-completed;
+  }
+
+  .status-badge-pending {
+    @apply status-badge bg-status-pending/10 text-status-pending;
+  }
+
+  .status-badge-progress {
+    @apply status-badge bg-status-progress/10 text-status-progress;
+  }
+
+  .status-badge-scheduled {
+    @apply status-badge bg-status-scheduled/10 text-status-scheduled;
+  }
+}

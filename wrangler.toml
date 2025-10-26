@@ -1,0 +1,27 @@
+name = "hackathon2-icap"
+compatibility_date = "2024-11-27"
+pages_build_output_dir = "dist"
+
+# Development variables (non-sensitive)
+[vars]
+DJANGO_API_URL = "http://localhost:8000"
+SUPABASE_URL = "https://qetwmgvlqzevksqnhruz.supabase.co"
+
+# KV Namespace for caching (will create this via CLI)
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "to-be-created"
+
+# Staging environment
+[env.staging]
+name = "hackathon2-icap-staging"
+vars = { DJANGO_API_URL = "https://api-psycho-staging.workers.dev" }
+
+# Production environment (main branch uses default name above)
+[env.production]
+vars = { DJANGO_API_URL = "https://api-psycho.workers.dev" }
+
+# Secrets (set via: wrangler secret put SECRET_NAME)
+# - DJANGO_API_KEY
+# - SUPABASE_SERVICE_ROLE_KEY
+# - JWT_SECRET

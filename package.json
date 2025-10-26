@@ -1,0 +1,37 @@
+{
+  "name": "hackathon2-icap-frontend",
+  "version": "1.0.0",
+  "description": "ICAP Survey Platform - Hono + Cloudflare Pages Frontend",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build && wrangler pages deploy dist",
+    "deploy:staging": "npm run build && wrangler pages deploy dist --branch=staging",
+    "deploy:production": "npm run build && wrangler pages deploy dist --branch=main",
+    "types:generate": "supabase gen types typescript --project-id qetwmgvlqzevksqnhruz > src/shared/types/supabase.ts",
+    "wrangler": "wrangler",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "hono": "^4.6.14",
+    "@supabase/supabase-js": "^2.45.6",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@hono/vite-dev-server": "^0.16.0",
+    "@hono/vite-cloudflare-pages": "^0.4.2",
+    "@hono/zod-validator": "^0.4.1",
+    "@cloudflare/workers-types": "^4.20241127.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.1",
+    "tailwindcss": "^3.4.16",
+    "postcss": "^8.4.49",
+    "autoprefixer": "^10.4.20",
+    "wrangler": "^3.87.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

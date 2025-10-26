@@ -1,0 +1,16 @@
+# Local Development Secrets
+# Copy this file to .dev.vars and fill in your actual values
+# Never commit .dev.vars to git!
+
+# Django OMR Backend API Key
+# Get this from your Django admin or settings
+DJANGO_API_KEY=your-django-token-here
+
+# Supabase Service Role Key (not anon key!)
+# Find this in: Supabase Dashboard > Settings > API > service_role key
+SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.your-service-role-key-here
+
+# JWT Secret for token validation
+# Should match the secret used by your auth system
+# Generate with: openssl rand -base64 32
+JWT_SECRET=your-secret-key-min-32-characters-here
