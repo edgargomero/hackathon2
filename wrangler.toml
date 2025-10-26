@@ -13,14 +13,13 @@ NODE_ENV = "development"
 # binding = "KV"
 # id = "to-be-created"
 
-# Staging environment
-[env.staging]
-name = "hackathon2-icap-staging"
-vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", NODE_ENV = "staging" }
+# Preview environment (for PRs and testing)
+[env.preview]
+vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", NODE_ENV = "preview" }
 
 # Production environment (main branch uses default name above)
 [env.production]
-vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", NODE_ENV = "production" }
+vars = { DJANGO_API_URL = "https://api-psycho.edgar-gomero.workers.dev", SUPABASE_URL = "https://qetwmgvlqzevksqnhruz.supabase.co", NODE_ENV = "production" }
 
 # Secrets (set via: wrangler secret put SECRET_NAME)
 # - DJANGO_API_KEY
