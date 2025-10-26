@@ -64,11 +64,14 @@ const updateProfileSchema = z.object({
  * Set HTTP-only cookies for tokens (more secure than localStorage)
  */
 function setAuthCookies(c: any, accessToken: string, refreshToken: string) {
+  // Determine if we're in development (HTTP) or production (HTTPS)
+  const isDevelopment = c.env.NODE_ENV !== 'production'
+
   // Access token - 1 hour
   setCookie(c, 'access_token', accessToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: 'Strict',
+    secure: !isDevelopment, // Only require HTTPS in production
+    sameSite: isDevelopment ? 'Lax' : 'Strict', // Lax for localhost, Strict for production
     maxAge: 3600, // 1 hour in seconds
     path: '/',
   })
@@ -76,8 +79,8 @@ function setAuthCookies(c: any, accessToken: string, refreshToken: string) {
   // Refresh token - 1 day
   setCookie(c, 'refresh_token', refreshToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: 'Strict',
+    secure: !isDevelopment, // Only require HTTPS in production
+    sameSite: isDevelopment ? 'Lax' : 'Strict',
     maxAge: 86400, // 1 day in seconds
     path: '/',
   })
@@ -165,10 +168,11 @@ app.post('/refresh', zValidator('json', refreshTokenSchema), async (c) => {
     const response = await djangoAuth.refreshToken(refresh)
 
     // Update access token cookie
+    const isDevelopment = c.env.NODE_ENV !== 'production'
     setCookie(c, 'access_token', response.access, {
       httpOnly: true,
-      secure: true,
-      sameSite: 'Strict',
+      secure: !isDevelopment,
+      sameSite: isDevelopment ? 'Lax' : 'Strict',
       maxAge: 3600,
       path: '/',
     })
@@ -195,6 +199,42 @@ app.post('/logout', (c) => {
   return c.json({
     message: 'Logged out successfully',
   })
+})
+
+/**
+ * POST /api/auth/validate-token
+ * Validate current session from HTTP-only cookie
+ * Used by SPA on mount to restore session
+ */
+app.post('/validate-token', async (c) => {
+  const { getCookie } = await import('hono/cookie')
+  const accessToken = getCookie(c, 'access_token')
+
+  if (!accessToken) {
+    return c.json({
+      valid: false,
+      message: 'No access token found'
+    }, 401)
+  }
+
+  const djangoAuth = createDjangoAuthClient(c.env)
+
+  try {
+    // Validate token with Django and get user data
+    const user = await djangoAuth.getCurrentUser(accessToken)
+
+    return c.json({
+      valid: true,
+      user,
+    })
+  } catch (error) {
+    // Token invalid or expired
+    clearAuthCookies(c)
+    return c.json({
+      valid: false,
+      message: 'Token invalid or expired'
+    }, 401)
+  }
 })
 
 /**
