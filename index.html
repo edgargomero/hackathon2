@@ -90,6 +90,8 @@
     </div>
 
     <!-- Client-side app entry point -->
-    <script type="module" src="/src/client/client.tsx"></script>
+    <!-- In dev: Vite serves /src/client/client.tsx with HMR -->
+    <!-- In prod: Compiled to /static/client.js -->
+    <script type="module" src="/static/client.js"></script>
   </body>
 </html>

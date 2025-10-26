@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "description": "Cloudflare Pages routing - API to worker, static files bypass",
+  "include": [
+    "/api/*"
+  ],
+  "exclude": [
+    "/static/*"
+  ]
+}
