@@ -1,0 +1,64 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // ============ JSX Configuration ============
+    // Usa Preact para c�digo cliente (no Hono JSX)
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+
+    // ============ Module Resolution ============
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+
+    // ============ Type Checking ============
+    // Hereda strict mode del tsconfig.json base
+    "strict": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+
+    // ============ Emit Configuration ============
+    "noEmit": true, // Vite maneja el bundling
+    "isolatedModules": true,
+
+    // ============ Library Types ============
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "types": ["vite/client", "@cloudflare/workers-types"],
+
+    // ============ Path Aliases ============
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@client/*": ["./src/client/*"],
+      "@server/*": ["./src/server/*"],
+      "@shared/*": ["./src/shared/*"]
+    },
+
+    // ============ Advanced Options ============
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
+  },
+
+  // ============ Files to Include ============
+  "include": [
+    "src/client/**/*",
+    "src/shared/**/*",
+    "src/vite-env.d.ts"
+  ],
+
+  // ============ Files to Exclude ============
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/server/**/*", // Excluye c�digo de servidor (usa Hono JSX)
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}

@@ -122,12 +122,14 @@ export const djangoClinicContextMiddleware = createMiddleware<HonoEnv>(async (c,
       throw new HTTPException(403, { message: 'User account is inactive' })
     }
 
-    if (!user.profile.clinica_id) {
+    // Superadmins can operate without a clinica_id (they manage multiple clinics)
+    if (!user.profile.clinica_id && user.profile.role !== 'superadmin') {
       throw new HTTPException(403, { message: 'No clinic associated with this user' })
     }
 
     // Update context with full user details
-    c.set('clinicaId', user.profile.clinica_id)
+    // clinica_id can be null for superadmins
+    c.set('clinicaId', user.profile.clinica_id || undefined)
     c.set('userRole', user.profile.role)
     c.set('userName', `${user.first_name} ${user.last_name}`)
 

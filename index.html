@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ICAP Survey Platform - Chilean HealthTech platform for psychometric evaluations" />
+
+    <title>ICAP Survey Platform</title>
+
+    <!-- Material Symbols Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- Tailwind CSS CDN (temporal - producción usará build) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: '#667eea',
+                50: '#f5f7ff',
+                100: '#ebf0ff',
+                200: '#d6e0ff',
+                300: '#b3c4ff',
+                400: '#8099ff',
+                500: '#667eea',
+                600: '#4d5ed4',
+                700: '#3d4cad',
+                800: '#2f3a7a',
+                900: '#1f2751',
+              },
+            },
+          },
+        },
+      }
+    </script>
+
+    <style>
+      /* Material Icons font configuration */
+      .material-symbols-outlined {
+        font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24;
+      }
+
+      /* Prevent flash of unstyled content */
+      #root {
+        min-height: 100vh;
+      }
+
+      /* Loading spinner */
+      .loader {
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* Dark mode background */
+      html.dark {
+        background-color: #0f172a;
+      }
+    </style>
+  </head>
+
+  <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50">
+    <!-- Root element para Preact -->
+    <div id="root">
+      <!-- Loading fallback -->
+      <div class="flex items-center justify-center min-h-screen">
+        <div class="text-center">
+          <div class="loader mx-auto mb-4"></div>
+          <p class="text-slate-600 dark:text-slate-400">Loading ICAP Platform...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Client-side app entry point -->
+    <script type="module" src="/src/client/client.tsx"></script>
+  </body>
+</html>

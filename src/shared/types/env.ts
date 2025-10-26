@@ -22,7 +22,7 @@ export type Bindings = {
 export type Variables = {
   userId: string
   userRole: 'superadmin' | 'clinica_admin' | 'institucion_admin' | 'profesional' | 'agente_ia' | 'readonly'
-  clinicaId: string
+  clinicaId?: string // Optional: undefined for superadmins without assigned clinic
   accessToken: string // Always present after djangoAuthMiddleware
   userName?: string // Optional, set by djangoClinicContextMiddleware
   currentUser?: any // Optional, full UserDetail object from Django

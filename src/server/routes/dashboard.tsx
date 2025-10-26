@@ -10,7 +10,6 @@ import { zValidator } from '@hono/zod-validator'
 import { z } from 'zod'
 import type { HonoEnv } from '@shared/types/env'
 import { getDashboardStatsFromDjango, getDashboardDataFromDjango } from '@server/services/dashboard-django'
-import { Dashboard } from '@server/components/Dashboard'
 
 const app = new Hono<HonoEnv>()
 
@@ -40,50 +39,14 @@ const exportQuerySchema = z.object({
 
 /**
  * GET / (HTML page)
- * Render dashboard page with SSR using Django data
+ * DEPRECATED: SSR removed in favor of SPA
+ * This route now redirects to the SPA served from index.html
+ *
+ * The actual dashboard is now a Preact SPA that calls /api endpoints
  */
-app.get('/', zValidator('query', dashboardQuerySchema), async (c) => {
-  const clinicaId = c.get('clinicaId')
-  const userName = c.get('userName')
-  const userRole = c.get('userRole')
-  const userId = c.get('userId')
-  const accessToken = c.get('accessToken')
-
-  if (!clinicaId) {
-    return c.html(
-      <div>
-        <h1>Error: No clinic context</h1>
-        <p>User must be associated with a clinic to view dashboard</p>
-      </div>,
-      403
-    )
-  }
-
-  try {
-    // Fetch dashboard data from Django API
-    const dashboardData = await getDashboardDataFromDjango(c.env, accessToken)
-    dashboardData.clinicaId = clinicaId
-
-    return c.html(
-      <Dashboard
-        data={dashboardData}
-        user={{
-          username: userName || `User ${userId}`,
-          email: '',
-          role: userRole || 'readonly',
-        }}
-      />
-    )
-  } catch (error) {
-    console.error('[Dashboard] Error rendering page:', error)
-    return c.html(
-      <div>
-        <h1>Error loading dashboard</h1>
-        <p>{error instanceof Error ? error.message : 'Unknown error'}</p>
-      </div>,
-      500
-    )
-  }
+app.get('/', (c) => {
+  // Redirect to root which serves index.html with Preact SPA
+  return c.redirect('/')
 })
 
 /**
