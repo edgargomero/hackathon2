@@ -51,6 +51,84 @@ app.use('/api/*', cors({
 
 // ==================== PUBLIC ROUTES ====================
 
+// Root route - Welcome page
+app.get('/', (c) => {
+  return c.html(
+    <html>
+      <head>
+        <title>ICAP Survey Platform</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>{`
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+          }
+          .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          }
+          h1 { font-size: 3rem; margin-bottom: 1rem; }
+          p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+          .links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+          }
+          a {
+            padding: 0.8rem 2rem;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          }
+          a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+          }
+          .status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+          }
+        `}</style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>🎯 ICAP Survey Platform</h1>
+          <p>Sistema de Encuestas y Evaluación Psicológica</p>
+          <div class="links">
+            <a href="/api/health">Health Check</a>
+            <a href="/api/version">API Version</a>
+            <a href="/api/dashboard">Dashboard</a>
+          </div>
+          <div class="status">
+            <strong>Status:</strong> ✅ Online<br/>
+            <strong>Environment:</strong> {c.env.NODE_ENV || 'development'}<br/>
+            <strong>API:</strong> {c.env.DJANGO_API_URL ? '✅ Configured' : '⚠️ Not configured'}
+          </div>
+        </div>
+      </body>
+    </html>
+  )
+})
+
 // Health check endpoint (no auth required)
 app.get('/api/health', (c) => {
   return c.json({
