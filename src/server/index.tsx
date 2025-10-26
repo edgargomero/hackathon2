@@ -93,75 +93,20 @@ app.route('/api/dashboard', dashboardRoutes)
 // ==================== SPA FALLBACK ====================
 
 /**
- * Serve SPA for all non-API routes
- * This enables client-side routing with wouter-preact
+ * SPA Routing Strategy:
  *
- * IMPORTANT: This MUST be defined BEFORE error handlers
- * so that the 404 handler doesn't catch SPA routes
+ * In DEVELOPMENT (npm run dev):
+ * - Vite dev server middleware intercepts all non-API routes
+ * - Serves index.html with HMR enabled
+ * - No explicit fallback route needed
+ *
+ * In PRODUCTION (Cloudflare Pages):
+ * - @hono/vite-cloudflare-pages plugin builds index.html → dist/index.html
+ * - Cloudflare Pages serves index.html for all non-API, non-static routes
+ * - _routes.json configures routing (see wrangler.toml)
+ *
+ * IMPORTANT: Do NOT add app.get('*') here - it prevents index.html from being served!
  */
-app.get('*', async (c) => {
-  // Read and serve index.html
-  // In development, Vite serves this automatically
-  // In production (Cloudflare Pages), this will serve the built index.html
-
-  return c.html(`<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ICAP Survey Platform</title>
-
-    <!-- Material Symbols Icons -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-
-    <!-- Tailwind CSS CDN (development) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              primary: {
-                50: '#f0f9ff',
-                100: '#e0f2fe',
-                200: '#bae6fd',
-                300: '#7dd3fc',
-                400: '#38bdf8',
-                500: '#0ea5e9',
-                600: '#0284c7',
-                700: '#0369a1',
-                800: '#075985',
-                900: '#0c4a6e',
-              }
-            }
-          }
-        }
-      }
-    </script>
-
-    <style>
-      /* Loading spinner */
-      .loader {
-        border: 3px solid rgba(0, 0, 0, 0.1);
-        border-top-color: currentColor;
-        border-radius: 50%;
-        width: 2rem;
-        height: 2rem;
-        animation: spin 0.6s linear infinite;
-      }
-
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/client/client.tsx"></script>
-  </body>
-</html>`)
-})
 
 // ==================== ERROR HANDLING ====================
 

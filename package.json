@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp index.html dist/index.html",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler pages deploy dist",
     "deploy:staging": "npm run build && wrangler pages deploy dist --branch=staging",
