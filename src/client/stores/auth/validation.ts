@@ -40,20 +40,36 @@ const UserDetailSchema = z.object({
   email: z.string().email(),
   first_name: z.string(),
   last_name: z.string(),
-  is_active: z.boolean(),
-  is_staff: z.boolean(),
-  is_superuser: z.boolean(),
-  date_joined: z.string(),
-  last_login: z.string().nullable(),
+  is_active: z.boolean().optional().default(true),
+  is_staff: z.boolean().optional().default(false),
+  is_superuser: z.boolean().optional().default(false),
+  date_joined: z.string().optional().default(new Date().toISOString()),
+  last_login: z.string().nullable().optional().default(null),
 
   // Profile data
   profile: UserProfileSchema,
 
-  // Computed properties from Django
-  is_superadmin: z.boolean(),
-  is_clinica_admin: z.boolean(),
-  is_institucion_admin: z.boolean()
-})
+  // Computed properties from Django (optional - se pueden derivar del profile.role)
+  is_superadmin: z.boolean().optional(),
+  is_clinica_admin: z.boolean().optional(),
+  is_institucion_admin: z.boolean().optional()
+}).transform((data) => ({
+  ...data,
+  // Derivar campos computados del role si no vienen de Django
+  is_superadmin: data.is_superadmin ?? (data.profile.role === 'superadmin'),
+  is_clinica_admin: data.is_clinica_admin ?? (data.profile.role === 'clinica_admin' || data.profile.role === 'superadmin'),
+  is_institucion_admin: data.is_institucion_admin ?? (
+    data.profile.role === 'institucion_admin' ||
+    data.profile.role === 'clinica_admin' ||
+    data.profile.role === 'superadmin'
+  ),
+  // Defaults seguros
+  is_active: data.is_active ?? true,
+  is_staff: data.is_staff ?? false,
+  is_superuser: data.is_superuser ?? (data.profile.role === 'superadmin'),
+  date_joined: data.date_joined ?? new Date().toISOString(),
+  last_login: data.last_login ?? null
+}))
 
 // ============ API Response Schemas ============
 
